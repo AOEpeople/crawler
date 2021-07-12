@@ -65,9 +65,6 @@ class CrawlerInitialization implements MiddlewareInterface
             'User Groups: ' . $queueParameters['feUserGroupList'],
         ];
 
-        // Execute the frontend request as is
-        $handler->handle($request);
-
         $GLOBALS['TSFE']->applicationData['tx_crawler']['vars'] = [
             'id' => $GLOBALS['TSFE']->id,
             'gr_list' => implode(',', $this->context->getAspect('frontend.user')->getGroupIds()),
@@ -76,12 +73,7 @@ class CrawlerInitialization implements MiddlewareInterface
 
         $this->runPollSuccessHooks();
 
-        // Output log data for crawler (serialized content):
-        $content = serialize($GLOBALS['TSFE']->applicationData['tx_crawler']);
-        $response = new Response();
-        $response->getBody()->write($content);
-
-        return $response;
+        return $handler->handle($request);
     }
 
     /**

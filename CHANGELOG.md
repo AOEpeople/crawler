@@ -68,7 +68,7 @@ Crawler 9.2.5 was released on May 28th, 2021
   * Writer/FileWriter/CsvWriter/CrawlerCsvWriter.php
 
 ### Fixed
-* Date parsing for immediate queue entries
+* Add new middleware for content finish
 
 ### Deprecated
 #### Classes
